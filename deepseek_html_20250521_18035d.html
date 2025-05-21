@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Comissão - Poder Financeiro</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background: url('Post_Instagram_Marketing_Digital_Estratégias_(2).png') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 80, 50, 0.85);
+            z-index: -1;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+        .logo span {
+            color: #4CAF50;
+        }
+        .calculator {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 2px solid #4CAF50;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #2E7D32;
+        }
+        select, input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #4CAF50;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: #f8f8f8;
+            transition: all 0.3s;
+        }
+        select:focus, input:focus {
+            outline: none;
+            border-color: #2E7D32;
+            box-shadow: 0 0 5px rgba(46, 125, 50, 0.5);
+        }
+        button {
+            background: linear-gradient(to bottom, #4CAF50, #2E7D32);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            transition: all 0.3s;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        button:hover {
+            background: linear-gradient(to bottom, #3e8e41, #1B5E20);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background: linear-gradient(to right, #E8F5E9, #C8E6C9);
+            border-radius: 10px;
+            text-align: center;
+            font-size: 18px;
+            display: none;
+            border-left: 5px solid #2E7D32;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #1B5E20;
+            font-size: 28px;
+            margin-top: 10px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: white;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">EXCLUSIVO <span>PODER FINANCEIRO</span></div>
+    
+    <div class="calculator">
+        <div class="form-group">
+            <label for="table">Tabela da Financeira:</label>
+            <select id="table">
+                <option value="">Selecione uma tabela</option>
+                <option value="PF-POWER1">PF-POWER1</option>
+                <option value="POWERBLACK">POWERBLACK</option>
+                <option value="TABELA PROMAX">TABELA PROMAX</option>
+                <option value="MEGA POWER">MEGA POWER</option>
+                <option value="SONHO DO CORBAN">SONHO DO CORBAN</option>
+                <option value="FOCO NO CORBAN">FOCO NO CORBAN</option>
+                <option value="CARTA NA MANGA">CARTA NA MANGA</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="amount">Valor Liberado da Proposta (R$):</label>
+            <input type="number" id="amount" placeholder="Digite o valor">
+        </div>
+        
+        <button onclick="calculateCommission()">CALCULAR COMISSÃO</button>
+        
+        <div class="result" id="result">
+            <p>Sua comissão será de:</p>
+            <p class="highlight" id="commission">R$ 0,00</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        ACIS FINNESOES © 2023 - Todos os direitos reservados
+    </div>
+
+    <script>
+        function calculateCommission() {
+            const table = document.getElementById('table').value;
+            const amount = parseFloat(document.getElementById('amount').value);
+            const resultDiv = document.getElementById('result');
+            const commissionSpan = document.getElementById('commission');
+            
+            if (!table || isNaN(amount)) {
+                alert('Por favor, selecione uma tabela e informe um valor válido.');
+                return;
+            }
+            
+            let percentage = 0;
+            
+            // Definir porcentagens conforme a tabela selecionada
+            switch(table) {
+                case 'PF-POWER1':
+                    percentage = (amount <= 250.99) ? 55 : 50;
+                    break;
+                case 'POWERBLACK':
+                    percentage = 46.5;
+                    break;
+                case 'TABELA PROMAX':
+                    percentage = (amount <= 250) ? 38 : 31;
+                    break;
+                case 'MEGA POWER':
+                    percentage = (amount <= 250.99) ? 28 : 26;
+                    break;
+                case 'SONHO DO CORBAN':
+                    percentage = (amount <= 250.99) ? 23 : 19;
+                    break;
+                case 'FOCO NO CORBAN':
+                    percentage = (amount <= 250.99) ? 18 : 15;
+                    break;
+                case 'CARTA NA MANGA':
+                    percentage = 2;
+                    break;
+            }
+            
+            const commission = (amount * percentage / 100).toFixed(2);
+            commissionSpan.textContent = `R$ ${commission.replace('.', ',')}`;
+            resultDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
